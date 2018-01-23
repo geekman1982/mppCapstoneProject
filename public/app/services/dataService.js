@@ -10,11 +10,13 @@ function dataService($http, $q) {
 
     return service;
 
+    /// This needs to be a factory!!!!!!!!!!!!!!!!!!!!
     function loadAllProducts() {
         var deferred = $q.defer();
 
-        if (this.products == null) {
+        if (this.products === null) {
             $http.get(azureDataURL).then(function (result) {
+                this.products = result.data;
                 deferred.resolve(result.data);
             });
         } else {

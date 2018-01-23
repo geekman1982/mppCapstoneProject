@@ -3,7 +3,6 @@ angular.module('app').controller('HomeController', ["dataService",
         const showcaseProductAmount = 5;
 
         var vm = this;
-        vm.message = 'Welcome!';
         vm.slideInterval = 3000;
         vm.enableSliding = false;
         vm.products = {};
