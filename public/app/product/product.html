@@ -1,18 +1,63 @@
+<div class="container-fluid">
+    <div class="col-md-12 pull-left">
+        <a class="btn btn-default" role="button" ng-click="vm.back()">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            &nbsp;Back
+        </a>
+    </div>
+</div>
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
-            IMAGE
+        <div class="col-md-4">
+            <img ng-src="{{vm.product.imagelink}}" class="img-responsive" />
         </div>
-        <div class="col-md-6">
-            <div class="row">
-                Product Name
-            </div>
-            <div class="row">
-                Rating: * * * * *
-            </div>
-            <div class="row">
-                
-                <input type="number" id="txtNumber"/>
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+
+                    <h1>{{vm.product.name}}</h1>
+
+                </div>
+                <div class="panel-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="pull-right">
+                                <strong>Rating: </strong>
+                                <span class="glyphicon glyphicon-star" style="color: gold; width: 25px; font-size: 1.2em" ng-repeat="i in vm.ratings track by $index"></span>
+                            </div>
+                        </div>
+                        <div class="row lead">
+                            <h3 class="list-group-item-heading">Product description </h3>
+                            <p class="list-group-item-text">
+                                {{vm.product.description}}
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <strong>Price: </strong> ${{vm.product.price}}
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <label for="txtQuantity">Quantity</label>
+                                    <input type="number" id="txtQuantity" value="1" />
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <a class="btn btn-success" role="button">
+                                    <span class="glyphicon glyphicon-plus"></span>&nbsp; Add to cart
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </div>
     </div>

@@ -1,11 +1,12 @@
 angular.module('app').controller('HomeController', ["dataService",
     function (dataService) {
-        const showcaseProductAmount = 5;
+        const showcaseProductAmount = 12;
 
         var vm = this;
         vm.slideInterval = 3000;
-        vm.enableSliding = false;
+        vm.slidingDisabled = false;
         vm.products = {};
+        vm.allProducts = [];
         vm.showcaseProducts = [];
 
         var azureService = dataService;
@@ -14,7 +15,8 @@ angular.module('app').controller('HomeController', ["dataService",
             function (response) {
                 /// Success
                 vm.products = response;
-                selectShowcaseProducts(showcaseProductAmount);
+                populateProducts();
+                selectShowcaseProducts();
             },
             function (response) {
                 /// Failed
@@ -22,72 +24,46 @@ angular.module('app').controller('HomeController', ["dataService",
             }
         )
 
-        function selectShowcaseProducts(numberOfProducts) {
+        function selectShowcaseProducts() {
 
             var alreadyAdded = [];
-            for (var i = 0; i < numberOfProducts; i++) {
 
-                var selectedCategory = randomCategory();
-                var selectedSubCategory = null;
-                while (selectedSubCategory === null) {
-                    selectedSubCategory = randomSubCategory(selectedCategory);
-                    if (selectedSubCategory !== null) {
-                        var selectedProduct = null;
-                        while (selectedProduct === null) {
-                            selectedProduct = randomProduct(selectedSubCategory);
+            var lower = 0;
+            var upper = vm.allProducts.length - 1;
 
-                            var allowedToAdd = $.inArray(selectedProduct.name, alreadyAdded) == -1;
-                            if (allowedToAdd){
-                                alreadyAdded.push(selectedProduct.name);
-                                selectedProduct.index = i;
-                            }else{
-                                /// We have already added this product
-                                /// Randomly select a different one
-                                selectedProduct = null;
-                            }
+            while (vm.showcaseProducts.length < showcaseProductAmount) {
+                var randomPosition = Math.floor(Math.random() * (upper - lower + 1) + lower);
 
-                        }
+                while ($.inArray(randomPosition, alreadyAdded) > -1){
+                    randomPosition = Math.floor(Math.random() * (upper - lower + 1) + lower);
+                }
+                alreadyAdded.push(randomPosition);
+                vm.showcaseProducts.push( vm.allProducts[randomPosition]);
+                console.log("selected " + randomPosition);
+            }
+        }
+
+        function populateProducts() {
+
+            for (var categoryCount = 0; categoryCount < vm.products.length; categoryCount++) {
+                var categoryObj = vm.products[categoryCount];
+                var categoryName = categoryObj.category;
+                for (var subCategoryCount = 0; subCategoryCount < categoryObj.subcategories.length; subCategoryCount++) {
+
+                    var subCategoryObj = categoryObj.subcategories[subCategoryCount];
+                    var subCategoryName = subCategoryObj.name;
+                    for (var productCount = 0; productCount < subCategoryObj.items.length; productCount++) {
+                        var productObj = subCategoryObj.items[productCount];
+
+                        productObj.category = categoryName;
+                        productObj.subCategory = subCategoryName;
+
+                        vm.allProducts.push(productObj);
+
                     }
                 }
-                
-                vm.showcaseProducts.push(selectedProduct);
             }
         }
 
-        function randomCategory() {
-            var lower = 0;
-            var upper = vm.products.length - 1;
-            var randomPosition = Math.floor(Math.random() * (upper - lower + 1) + lower);
-
-            while(vm.products[randomPosition] == undefined){
-                randomPosition = Math.floor(Math.random() * (upper - lower + 1) + lower);    
-            }
-            return vm.products[randomPosition]
-        }
-
-        function randomSubCategory(categoryObject) {
-            if (categoryObject.subcategories === undefined)
-                return null;
-            var lower = 0;
-            var upper = categoryObject.subcategories.length - 1;
-            var randomPosition = Math.floor(Math.random() * (upper - lower + 1) + lower);
-
-            return categoryObject.subcategories[randomPosition]
-        }
-
-        function randomProduct(subCategoryObject) {
-            var returnObj = null;
-            if (subCategoryObject.items === undefined)
-                return returnObj;
-
-            var lower = 0;
-            var upper = subCategoryObject.items.length - 1;
-            while(returnObj === null){
-                var randomPosition = Math.floor(Math.random() * (upper - lower + 1) + lower);
-                returnObj = subCategoryObject.items[randomPosition];
-            }
-
-            return returnObj;
-        }
     }
 ]);

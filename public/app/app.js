@@ -4,7 +4,7 @@ angular.module("app").config([
     function ($routeProvider, $locationProvider) {
         $locationProvider.html5Mode(true);
         $routeProvider
-            .when("/product/:productName", {
+            .when("/product", {
                 templateUrl: "/app/product/product.html",
                 controller: "ProductController",
                 controllerAs: "vm"
