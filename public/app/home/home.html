@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+        <div class="jumbotron">
+            <h1>Welcome to Online shop thing</h1>
+            <p>Buy it now. Buy it cheap</p>
+            <p>
+                <a class="btn btn-primary btn-lg" href="/shopping" role="button">Shop all</a>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div style="height: 300px" uib-carousel active="active" interval="vm.slideInterval" no-wrap="vm.enableSliding">
+            <div uib-slide ng-repeat="product in vm.showcaseProducts track by product.index" index="product.index">
+                <div class="container-fluid">
+                    <div class="col-md-6">
+                        <img ng-src="{{product.imagelink}}" style="margin:auto; height: 280px" alt="{{product.name}}">
+                        <div class="carousel-caption">
+                            <h4>{{product.name}}</h4>
+                            <p>{{product.description}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <img ng-src="{{product.imagelink}}" style="margin:auto; height: 280px" alt="{{product.name}}">
+                        <div class="carousel-caption">
+                            <h4>{{product.name}}</h4>
+                            <p>{{product.description}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <img ng-src="{{product.imagelink}}" style="margin:auto; height: 280px" alt="{{product.name}}">
+                        <div class="carousel-caption">
+                            <h4>{{product.name}}</h4>
+                            <p>{{product.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="vm.enableSliding"> Toggle Slide Show
+                </label>
+            </div>
+        </div>
+    </div>
+
+</div>
