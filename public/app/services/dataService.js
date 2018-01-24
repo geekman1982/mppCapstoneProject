@@ -1,26 +1,25 @@
-angular.module('app').factory('dataService', ['$http', '$q', dataService]);
+angular.module('app').factory('dataService', ['$http', '$q', "cartFactory", dataService]);
 
-function dataService($http, $q) {
+function dataService($http, $q, cartFactory) {
     const azureDataURL = "https://webmppcapstone.blob.core.windows.net/data/itemsdata.json";
-
+    var sessionObj = cartFactory;
     var service = {
-        products: null,
         getProducts: loadAllProducts
     };
 
     return service;
 
-    /// This needs to be a factory!!!!!!!!!!!!!!!!!!!!
     function loadAllProducts() {
-        var deferred = $q.defer();
 
-        if (this.products === null) {
+        var deferred = $q.defer();
+        var cached = sessionObj.getAzureProducts();
+        if (!cached){
             $http.get(azureDataURL).then(function (result) {
-                this.products = result.data;
+                sessionObj.setAzureProducts(result.data);
                 deferred.resolve(result.data);
             });
         } else {
-            deferred.resolve(this.products);
+            deferred.resolve(cached);
         }
 
         return deferred.promise;

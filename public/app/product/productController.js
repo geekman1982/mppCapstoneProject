@@ -1,14 +1,22 @@
-angular.module('app').controller('ProductController', ["$location", "$window", "dataService",
-    function ($location, $window, dataService) {
+angular.module('app').controller('ProductController', ["$location", "$window", "dataService", "cartFactory",
+    function ($location, $window, dataService, cartFactory) {
+        var cart = cartFactory;
         var vm = this;
         vm.selectedProduct = $location.search().name;
         vm.product = {};
         vm.ratings = [];
+        vm.quantity = 1;
         var azureService = dataService;
 
         vm.back = function () {
             $window.history.back();
         };
+
+        vm.addToCart = function () {
+            var productToAdd = vm.product;
+            var quantityToAdd = vm.quantity;
+            cart.add(productToAdd, quantityToAdd);
+        }
 
         azureService.getProducts().then(
             function (response) {
@@ -55,5 +63,6 @@ angular.module('app').controller('ProductController', ["$location", "$window", "
         function setupRatings() {
             vm.ratings.length = parseInt(vm.product.rating);
         }
+
     }
 ]);

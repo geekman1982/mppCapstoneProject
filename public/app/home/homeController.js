@@ -39,7 +39,6 @@ angular.module('app').controller('HomeController', ["dataService",
                 }
                 alreadyAdded.push(randomPosition);
                 vm.showcaseProducts.push( vm.allProducts[randomPosition]);
-                console.log("selected " + randomPosition);
             }
         }
 

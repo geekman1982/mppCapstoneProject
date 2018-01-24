@@ -1,5 +1,6 @@
-angular.module('app').controller('ShoppingController', ["$filter", "orderByFilter", "dataService",
-    function ($filter, orderByFilter, dataService) {
+angular.module('app').controller('ShoppingController', ["$filter", "orderByFilter", "dataService","cartFactory",
+    function ($filter, orderByFilter, dataService, cartFactory) {
+        var cart = cartFactory;
         var vm = this;
 
         vm.config = {
@@ -47,6 +48,7 @@ angular.module('app').controller('ShoppingController', ["$filter", "orderByFilte
                         productObj.isInStock = (parseInt(productObj.stock) > 0);
                         productObj.ratings = [];
                         productObj.ratings.length = parseInt(productObj.rating);
+                        productObj.quantity = 1;
                         vm.flatProducts.push(productObj);
                     }
                 }
@@ -109,10 +111,13 @@ angular.module('app').controller('ShoppingController', ["$filter", "orderByFilte
             vm.config.filteredItems = orderByFilter(vm.config.filteredItems, vm.config.sortBy, ascending);
 
         };
+
+        vm.addToCart = function (product) {
+            cart.add(product, 1);
+        }
     }
 ]).filter("categoryFilter", function () {
     return function (items, vmObject) {
-        console.log(arguments);
         var currentSelectedCategory = vmObject.config.selectedSubCategory;
         var filtered = [];
         items.forEach(function (item) {

@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4">
-            <img ng-src="{{vm.product.imagelink}}" class="img-responsive" />
+            <img ng-src="{{vm.product.imagelink}}" style="max-height: 500px" class="img-responsive" />
         </div>
         <div class="col-md-8">
             <div class="panel panel-default">
@@ -38,18 +38,23 @@
                 <div class="panel-footer">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <strong>Price: </strong> ${{vm.product.price}}
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <div class="input-group">
-                                    <label for="txtQuantity">Quantity</label>
-                                    <input type="number" id="txtQuantity" value="1" />
+                                    <label for="txtStock">Stock left: </label>
+                                    <span id="txtStock" name="txtStock">{{vm.product.stock}}</span>
                                 </div>
-
                             </div>
-                            <div class="col-md-4">
-                                <a class="btn btn-success" role="button">
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <label for="txtQuantity">Quantity: </label>
+                                    <input type="number" id="txtQuantity" min="1" ng-model="vm.quantity" />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <a ng-click="vm.addToCart()" class="btn btn-success" role="button">
                                     <span class="glyphicon glyphicon-plus"></span>&nbsp; Add to cart
                                 </a>
                             </div>

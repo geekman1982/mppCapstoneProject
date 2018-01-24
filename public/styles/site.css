@@ -1,0 +1,59 @@
+/*
+Look and Feel 
+*/
+.cloud-blue {
+    color: dodgerblue
+}
+
+.gold-star{
+    color: gold; 
+    width: 25px; 
+    font-size: 1.2em
+}
+
+.carousel-image{
+    margin:auto !important;
+    max-height: 200px !important; 
+    min-height: 200px !important;
+}
+
+.product-grid-border{
+    padding: 5px;
+    border: 1px solid rgb(179, 179, 179);
+}
+
+.smallest-images{
+    max-height: 45px !important;
+}
+
+/*
+Layout
+*/
+.body#mainBody{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.bottom-nav{
+    overflow: hidden;
+}
+
+.carousel-control.left,
+.carousel-control.right {
+    background-image: none !important;
+    color: #000000 !important;
+    margin: -50px !important;
+}
+
+/*
+.carousel-inner {
+    width: 90%;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+*/
+
+.carousel-inner {
+    padding-left: 100px !important;
+    padding-right: 100px !important;
+}

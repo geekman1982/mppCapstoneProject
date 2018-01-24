@@ -51,11 +51,11 @@
             </div>
 
             <div class="row">
-                <div class="col-md-4 text-center box-shadow flex" style="padding: 5px; border: 1px solid rgb(179, 179, 179)" ng-repeat="product in vm.config.filteredItems | stockFilter:vm track by product.name">
+                <div class="col-md-4 text-center box-shadow flex product-grid-border" ng-repeat="product in vm.config.filteredItems | stockFilter:vm track by product.name">
                     <div class="container-fluid">
                         <div class="row">
                             <a ng-href="/product?name={{product.name}}">
-                                <img class="img-responsive" ng-src="{{product.imagelink}}" style="margin:auto; max-height: 200px; min-height: 200px" alt="{{product.name}}"
+                                <img class="img-responsive carousel-image" ng-src="{{product.imagelink}}" alt="{{product.name}}"
                                 />
                             </a>
                         </div>
@@ -73,10 +73,10 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 pull-left">
-                                <span class="glyphicon glyphicon-star" style="color: gold; width: 25px; font-size: 1.2em" ng-repeat="i in product.ratings track by $index"></span>
+                                <span class="glyphicon glyphicon-star gold-star" ng-repeat="i in product.ratings track by $index"></span>
                             </div>
                             <div class="col-md-6 pull-right">
-                                <a class="btn btn-success btn-xs" role="button">
+                                <a class="btn btn-success btn-xs" role="button" ng-click="vm.addToCart(product)">
                                     <span class="glyphicon glyphicon-plus"></span>&nbsp;Add
                                 </a>
                             </div>
