@@ -1,70 +1,91 @@
-<div class="container">
-    <nav class="navbar navbar-default">
+<div class="row">
+    <div class="col-md-3">
+        <uib-accordion close-others="false">
+            <div uib-accordion-group class="panel-default" heading="Categories" is-open="true">
+                <uib-accordion close-others="false" ng-repeat="category in vm.categories track by $index">
+                    <div uib-accordion-group class="panel-default" heading="{{category.category}}" is-open="false">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item" ng-class="{active: subcategory.name === vm.config.selectedSubCategory}" ng-repeat="subcategory in category.subCategories track by subcategory.id"
+                                ng-click="vm.setSelectedSubcategory(subcategory.name)">
+                                {{subcategory.name}}
+                            </a>
+                        </div>
+
+                    </div>
+                </uib-accordion>
+            </div>
+        </uib-accordion>
+    </div>
+    <div class="col-md-9">
         <div class="container-fluid">
             <div class="row">
-
-                <div class="col-md-3">
-                    Selected item:
-                    <label>{{vm.selectedItem}}</label>
-                </div>
-                <div class="col-md-3">
-                    Items found:
-                    <label>{{vm.itemCount}}</label>
-                </div>
-                <div class="col-md-3">
-                    <input type="radio" name="radioInStock" id="radioInStock" value="small" />
-                    <label for="radioInStock">In Stock Only</label>
-                </div>
-                <div class="col-md-3">
-                    <label for="comboSortBy">Sort By</label>
-                    <select id="comboSortBy" ng-model="vm.currentSetting">
-                        <option value="">None</option>
-                        <option value="price">Price</option>
-                        <option value="alphabetical">Alphabetical</option>
-                        <option value="rating">Rating</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <div class="row">
-        <div class="col-md-4">
-            <uib-accordion close-others="false">
-                <div uib-accordion-group class="panel-default" heading="Categories" is-open="true">
-                    <uib-accordion close-others="false" ng-repeat="category in vm.products track by $index">
-                        <div uib-accordion-group class="panel-default" heading="{{category.category}}" is-open="false">
-                            <div class="input-group" ng-repeat="subcategory in category.subcategories track by subcategory.name">
-                                <a>{{subcategory.name}}</a>
+                <div class="well well-sm">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-4">
+                                Selected Category:
+                                <label>{{vm.config.selectedSubCategory}}</label>
+                            </div>
+                            <div class="col-md-3">
+                                Showing
+                                <label>{{vm.config.foundFiltered}}</label> of
+                                <label>{{vm.config.foundItems}}</label> items
+                            </div>
+                            <div class="col-md-2">
+                                <input type="checkbox" name="checkInStock" id="checkInStock" value="small" data-ng-model="vm.config.onlyInStock" data-ng-value="true"
+                                />
+                                <label for="checkInStock">In Stock Only</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="comboSortBy">Sort By</label>
+                                <select id="comboSortBy" ng-model="vm.config.sortBy" ng-change="vm.performSort()">
+                                    <option value="">None</option>
+                                    <option value="price">Price</option>
+                                    <option value="name">Alphabetical</option>
+                                    <option value="rating">Rating</option>
+                                </select>
                             </div>
                         </div>
-                    </uib-accordion>
+                    </div>
                 </div>
-            </uib-accordion>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 text-center box-shadow flex" style="padding: 5px; border: 1px solid rgb(179, 179, 179)" ng-repeat="product in vm.config.filteredItems | stockFilter:vm track by product.name">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <a ng-href="/product?name={{product.name}}">
+                                <img class="img-responsive" ng-src="{{product.imagelink}}" style="margin:auto; max-height: 200px; min-height: 200px" alt="{{product.name}}"
+                                />
+                            </a>
+                        </div>
+                        <div class="row">
+                            <label>
+                                <a ng-href="/product?name={{product.name}}">
+                                    {{product.name}}
+                                </a>
+                            </label>
+                        </div>
+                        <div class="row">
+
+                            <label>${{product.price}}</label>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 pull-left">
+                                <span class="glyphicon glyphicon-star" style="color: gold; width: 25px; font-size: 1.2em" ng-repeat="i in product.ratings track by $index"></span>
+                            </div>
+                            <div class="col-md-6 pull-right">
+                                <a class="btn btn-success btn-xs" role="button">
+                                    <span class="glyphicon glyphicon-plus"></span>&nbsp;Add
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
-        <div class="col-md-8">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Name</th>>
-                        <th>Price</th>>
-                        <th>Image</th>>
-                        <th>Add</th>>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="product in vm.flatProducts track by $index">
-                        <td>{{product.name}}</td>
-                        <td>{{product.price}}</td>
-                        <td>
-                            <img ng-src="{{product.imagelink}}" style="margin:auto; height: 60px" alt="{{product.name}}">
-                        </td>
-                        <td>
-                            <span class="glyphicon glyphicon-plus-sign"></span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+
     </div>
 </div>
