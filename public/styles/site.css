@@ -29,9 +29,9 @@ Look and Feel
 /*
 Layout
 */
-.body#mainBody{
-    margin-top: 50px;
-    margin-bottom: 50px;
+.nav-padded{
+    padding-top: 55px;
+    padding-bottom: 55px;
 }
 
 .bottom-nav{
@@ -45,15 +45,29 @@ Layout
     margin: -50px !important;
 }
 
-/*
-.carousel-inner {
-    width: 90%;
-    margin-left: 100px;
-    margin-right: 100px;
-}
-*/
-
 .carousel-inner {
     padding-left: 100px !important;
     padding-right: 100px !important;
+}
+
+/*
+This is CSS from the avatar API site: https://api.adorable.io
+*/
+.avatar-image{
+    -webkit-user-select: none;
+    background-position: 0px 0px, 0px, 0px;
+    background-size: 20px 20px;
+    background-image:linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee 100%),linear-gradient(45deg, #eee 25%, white 25%, white 75%, #eee 75%, #eee 100%);
+    min-width: 500px;
+    min-height: 500px;
+    width:800px;
+}
+.avatar-main-container{
+    padding-top: 15px;
+}
+.avatar-text{
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

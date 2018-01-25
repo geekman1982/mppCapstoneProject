@@ -1,1 +1,74 @@
-<h1>Contact page</h1>
+<div class="row">
+    <h1>Contact us
+        <small>Have a query or complaint?</small>
+    </h1>
+</div>
+<div class="row">
+    <div class="col-md-7">
+        <form class="form-horizontal well">
+            <div class="form-group" ng-class="(vm.fieldIsOk('name') ? 'has-error' : 'has-success')">
+                <label for="inputName" class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputName" placeholder="Your name" required ng-model="vm.contact.name" ng-change="vm.fieldIsOk('all')" >
+                </div>
+            </div>
+            <div class="form-group" ng-class="(vm.fieldIsOk('email') ? 'has-error' : 'has-success')">
+                <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputEmail" placeholder="email@provider.com" required ng-model="vm.contact.mail" ng-change="vm.fieldIsOk('all')" >
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputSubject" class="col-sm-2 control-label">Reason</label>
+                <div class="col-sm-10">
+                    <select class="form-control" ng-model="vm.contact.reason" ng-change="vm.fieldIsOk('all')" >
+                        <option selected value="General query">General query</option>
+                        <option value="Complaint">Complaint</option>
+                        <option value="Comment">Comment</option>
+                        <option value="Positive feedback">Positive feedback</option>
+                        <option value="Unspecified query">Unspecified</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" ng-class="(vm.fieldIsOk('message') ? 'has-error' : 'has-success')">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <textarea class="form-control" rows="4" placeholder="Describe your feedback here" required ng-model="vm.contact.message" ng-change="vm.fieldIsOk('all')" ></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success" ng-disabled="!vm.contact.infoOk" ng-click="vm.showSendAlert()">Send</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-5">
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Business Contact Details</h3>
+            </div>
+            <div class="panel-body">
+                <div class="media">
+                    <div class="media-left">
+                        <span class="media-object glyphicon glyphicon-envelope"></span>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Email address</h4>
+                        consumer@cloudgrocery.com
+                    </div>
+                </div>
+                <div class="media">
+                    <div class="media-left">
+                        <span class="media-object glyphicon glyphicon-earphone"></span>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Telephone number</h4>
+                        +27 81 876-1133
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

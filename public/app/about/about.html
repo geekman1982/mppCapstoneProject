@@ -1,1 +1,16 @@
-<h1>About us page</h1>
+<div class="row text-center">
+    <h1><span class="glyphicon glyphicon-cloud cloud-blue"></span>&nbsp;About Cloud Grocery
+        <small>&rarr;Meet the team</small>
+    </h1>
+</div>
+<div class="row avatar-main-container">
+    <div class="container-fluid">
+        <div class="col-md-4" ng-repeat="avatar in vm.config.randomAvatars track by $index">
+            <img class="avatar-image img-rounded img-responsive" ng-src="{{avatar}}" />
+            <div class="avatar-text well">
+                Hi! I am person #{{$index + 1}}
+            </div>
+        </div>
+
+    </div>
+</div>

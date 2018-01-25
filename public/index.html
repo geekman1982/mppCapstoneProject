@@ -16,56 +16,62 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.3/ui-bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.3/ui-bootstrap-tpls.min.js"></script>
 
-    <base href="/" />
+    <base href="/"/>
 </head>
 
-<body class="container-fluid">
-    <nav class="navbar navbar-inverse navbar-static-top">
+<body class="container-fluid nav-padded">
+    <header>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
 
-        <a class="navbar-brand col-xs-5" href="/">
-            <span class="glyphicon glyphicon-cloud cloud-blue"></span>
-            Grocery Cloud
-        </a>
-        <ul class="nav navbar-nav col-xs-2">
-            <li>
-                <a href="/">Home</a>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav col-xs-3">
-            <li>
-                <a href="/shopping">Shop All</a>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav pull-right col-xs-2">
-            <li>
-                <a href="/cart">
-                    <span class="glyphicon glyphicon-shopping-cart cloud-blue"></span>
-                    Cart
-                </a>
-            </li>
-        </ul>
+            <a class="navbar-brand col-xs-5" href="/">
+                <span class="glyphicon glyphicon-cloud cloud-blue"></span>
+                Grocery Cloud
+            </a>
+            <ul class="nav navbar-nav col-xs-2">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav col-xs-3">
+                <li>
+                    <a href="/shopping">Shop All</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav pull-right col-xs-2">
+                <li>
+                    <a href="/cart">
+                        <span class="glyphicon glyphicon-shopping-cart cloud-blue"></span>
+                        Cart
+                    </a>
+                </li>
+            </ul>
 
-    </nav>
+        </nav>
+    </header>
 
-    <div ng-view class="container-fluid  bottom-nav"></div>
+    <div ng-view class="container-fluid bottom-nav">
+    </div>
 
-    <nav class="navbar navbar-default navbar-fixed-bottom">
+    <footer>
+        <nav class="navbar navbar-default navbar-fixed-bottom">
 
-        <ul class="nav navbar-nav">
-            <li class="col-md-4">
-                <a href="/">Home</a>
-            </li>
-            <li class="col-md-4">
-                <a href="/about">About</a>
-            </li>
-            <li class="col-md-4">
-                <a href="/contact">Contact</a>
-            </li>
-        </ul>
+            <ul class="nav navbar-nav">
+                <li class="col-md-4">
+                    <a href="/">Home</a>
+                </li>
+                <li class="col-md-4">
+                    <a href="/about">About</a>
+                </li>
+                <li class="col-md-4">
+                    <a href="/contact">Contact</a>
+                </li>
+            </ul>
 
-    </nav>
+        </nav>
+    </footer>
     <script src="./app/app.js"></script>
     <script src="./app/services/dataService.js"></script>
+    <script src="./app/services/avatarService.js"></script>
     <script src="./app/factories/cartFactory.js"></script>
     <script src="./app/home/homeController.js"></script>
     <script src="./app/shopping/shoppingController.js"></script>
